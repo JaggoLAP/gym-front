@@ -1,0 +1,20 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import RegisterPage from './pages/RegisterPage';
+import EmployeeDashboard from './pages/EmployeeDashboard';
+import MemberDashboard from './pages/MemberDashboard';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+        <Route path="/member-dashboard" element={<MemberDashboard />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
