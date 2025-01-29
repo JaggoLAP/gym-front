@@ -5,10 +5,11 @@ import Navbar from '../components/navBar';
 import Footer from '../components/Footer';
 import gymBackground from '../assets/gym-background.jpg';
 import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -29,19 +30,30 @@ function HomePage() {
             <h2 className="subtitle">
               Descubre actividades para mejorar tu cuerpo y tu mente.
             </h2>
-            <button
-              className="button is-primary"
-              onClick={toggleModal} 
-              style={{ marginTop: '20px', display: 'block' }}
-            >
-              Iniciar Sesión
-            </button>
-            <a href="/register" 
-              className="button is-link is-small" 
-              style={{ marginTop: '10px', display: 'block' }}
-            >
-              Primera Vez → Registrate
-            </a>
+            <div style={{ display:'flex', justifyContent:'center', marginTop:'20px'}}>
+              <button
+                className="button is-primary"
+                onClick={toggleModal} 
+                style={{ marginTop: '20px', display: 'block' }}
+              >
+                Iniciar Sesión
+              </button>
+            </div>
+            <div style={{marginTop:'10px'}}>
+              <p
+                className="has-text-white has-text-weight-bold"
+                style={{ cursor: 'pointer', marginTop: '10px' }}
+                onClick={() => setIsRegisterModalOpen(true)}
+              >
+                ¿Primera vez? <u>Regístrate</u>
+               </p>
+              {/*<a href="/register" 
+                className="button is-link is-small" 
+                style={{color:'white',textDecoration:'underline'}}
+              >
+                Primera Vez → Registrate
+              </a>*/}
+            </div>
           </div>
         </div>
       </section>
@@ -72,6 +84,7 @@ function HomePage() {
         </div>
       </section>
       <Footer />
+      
       {/*Modal para el login*/}
       {isModalOpen && (
         <div className={`modal ${isModalOpen ? 'is-active' : ''}`}>
@@ -93,6 +106,22 @@ function HomePage() {
                 Cerrar
               </button>
             </footer>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para Registro */}
+      {isRegisterModalOpen && (
+        <div className={`modal is-active`}>
+          <div className="modal-background" onClick={() => setIsRegisterModalOpen(false)}></div>
+          <div className="modal-card">
+            <header className="modal-card-head">
+              <p className="modal-card-title">Registro</p>
+              <button className="delete" aria-label="close" onClick={() => setIsRegisterModalOpen(false)}></button>
+            </header>
+            <section className="modal-card-body">
+              <RegisterForm />
+            </section>
           </div>
         </div>
       )}

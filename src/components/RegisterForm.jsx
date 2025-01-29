@@ -1,98 +1,126 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    nombre: '',
     email: '',
-    phone: '',
-    address: '',
-    dob: '',/*fecha de nacimiento*/
+    password: '',
+    confirmPassword: '',
+    role: 'cliente', // Por defecto, todos serán clientes
   });
 
-  const [isRegistered, setIsRegistered] = useState(false);
-  const navigate = useNavigate();
-
-   /*cambios en los campos del formulario*/
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-   /*enviar formulario*/
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsRegistered(true); // Muestra el mensaje de éxito
-    setTimeout(() => {
-      setIsRegistered(false); // Oculta el mensaje después de 3 segundos
-      navigate('/'); // Redirige a la página principal
-    }, 3000);
-    /*console.log('Socio registrado:', formData);*/
-    // enviar datos al backend
+    console.log('Registrando usuario:', formData);
+    // backend
   };
+
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', background: '#f9f9f9', borderRadius: '8px' }}>
-      <h2>Registro de Socio</h2>
-      {isRegistered && <p style={{ color: 'green', fontWeight: 'bold' }}>¡Cliente registrado exitosamente!</p>}
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <label>
-          Nombre:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-            required />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-            required />
-        </label>
-        <label>
-          Teléfono:
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-            required />
-        </label>
-        <label>
-          Dirección:
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-            required />
-        </label>
-        <label>
-          Fecha de Nacimiento:
-          <input
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-            required />
-        </label>
-        <button type="submit" style={{ padding: '10px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Registrar
-        </button>
-        <Link to={"/"}>
-          <button>Volver</button>
-        </Link>
-      </form>
+    <div className="container is-fluid">
+      <div className="box" style={{ maxWidth: '400px', margin: '50px auto' }}>
+        <h1 className="title has-text-centered">Registro</h1>
+        <form onSubmit={handleSubmit}>
+          {/* Nombre */}
+          <div className="field">
+            <label className="label">Nombre Completo</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                name="nombre"
+                placeholder="Ingresa tu nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+                required
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Correo */}
+          <div className="field">
+            <label className="label">Correo Electrónico</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="email"
+                name="email"
+                placeholder="ejemplo@correo.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Contraseña */}
+          <div className="field">
+            <label className="label">Contraseña</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="password"
+                name="password"
+                placeholder="Ingresa tu contraseña"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Confirmar Contraseña */}
+          <div className="field">
+            <label className="label">Confirmar Contraseña</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirma tu contraseña"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Selector de Rol */}
+          <div className="field">
+            <label className="label">Tipo de Usuario</label>
+            <div className="control">
+              <div className="select is-fullwidth">
+                <select name="role" value={formData.role} onChange={handleChange}>
+                  <option value="cliente">Cliente</option>
+                  <option value="empleado">Empleado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Botón de Registro */}
+          <div className="field">
+            <button type="submit" className="button is-primary is-fullwidth">
+              Registrarse
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
