@@ -14,7 +14,7 @@ function HomePage() {
   };
   return (
     <div>
-      <Navbar />
+      <Navbar onLoginClick={toggleModal}/>
       <section
         className="hero is-fullheight is-primary is-bold"
         style={{
@@ -27,22 +27,22 @@ function HomePage() {
           <div className="container has-text-centered">
             <h1 className="title">¡Bienvenido Gimnasio Average Joe!</h1>
             <h2 className="subtitle">
-              Descubre actividades para mejorar tu cuerpo y mente.
+              Descubre actividades para mejorar tu cuerpo y tu mente.
             </h2>
-            <a href="#login" className="button is-primary" style={{ marginTop: '20px' }}>
+            <button
+              className="button is-primary"
+              onClick={toggleModal} 
+              style={{ marginTop: '20px', display: 'block' }}
+            >
               Iniciar Sesión
-            </a>
-            <a href="/register" className="button is-link is-small" style={{ marginTop: '10px' }}>
+            </button>
+            <a href="/register" 
+              className="button is-link is-small" 
+              style={{ marginTop: '10px', display: 'block' }}
+            >
               Primera Vez → Registrate
             </a>
           </div>
-        </div>
-      </section>
-      
-      <section id="login" className="section">
-        <div className="container">
-          <h2 className="title">Iniciar Sesión</h2>
-          <LoginForm />
         </div>
       </section>
 
@@ -72,6 +72,7 @@ function HomePage() {
         </div>
       </section>
       <Footer />
+      {/*Modal para el login*/}
       {isModalOpen && (
         <div className={`modal ${isModalOpen ? 'is-active' : ''}`}>
           <div className="modal-background" onClick={toggleModal}></div>
