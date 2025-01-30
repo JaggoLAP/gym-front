@@ -5,12 +5,13 @@ const authService = {
       }
   
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+        const passwordStr = String(password);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password: passwordStr }),
         });
   
         if (!response.ok) {
