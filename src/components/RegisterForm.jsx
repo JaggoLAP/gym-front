@@ -7,6 +7,7 @@ const RegisterForm = () => {
     password: '',
     confirmPassword: '',
     role: 'cliente', // Por defecto, todos serán clientes
+    numeroEmpleado: '', // Solo si el usuario es empleado
   });
 
   const handleChange = (e) => {
@@ -112,6 +113,27 @@ const RegisterForm = () => {
               </div>
             </div>
           </div>
+
+          {/* si el usuario es empleado */}
+          {formData.role === 'empleado' && (
+            <div className="field">
+              <label className="label">Número de Empleado</label>
+              <div className="control has-icons-left">
+                <input
+                  className="input"
+                  type="text"
+                  name="numeroEmpleado"
+                  placeholder="Ingresa tu número de empleado"
+                  value={formData.numeroEmpleado}
+                  onChange={handleChange}
+                  required={formData.role === 'empleado'}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-id-badge"></i>
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Botón de Registro */}
           <div className="field">

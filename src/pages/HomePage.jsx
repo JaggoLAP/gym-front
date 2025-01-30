@@ -1,5 +1,6 @@
 import 'react';
 import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 /*import { Link } from 'react-router-dom';*/
 import Navbar from '../components/navBar';
 import Footer from '../components/Footer';
@@ -8,6 +9,7 @@ import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 
 function HomePage() {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const toggleModal = () => {
@@ -125,6 +127,16 @@ function HomePage() {
           </div>
         </div>
       )}
+
+      {/* Botones de prueba para Cliente y Empleado */}
+      <div className="buttons is-centered">
+        <button className="button is-info" onClick={() => navigate('/cliente')}>
+          Página Cliente
+        </button>
+        <button className="button is-warning" onClick={() => navigate('/empleado')}>
+          Página Empleado
+        </button>
+      </div>
     </div>
   );
 }
