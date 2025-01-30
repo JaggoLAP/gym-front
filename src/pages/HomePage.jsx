@@ -26,7 +26,7 @@ function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="hero-body">
+        <div className="hero-body" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
           <div className="container has-text-centered">
             <h1 className="title">¡Bienvenido Gimnasio Average Joe!</h1>
             <h2 className="subtitle">

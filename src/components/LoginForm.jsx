@@ -1,13 +1,26 @@
-import  { useState } from 'react';
+import  { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Iniciando sesión con:', { email, password });
-    // Aquí puedes agregar la lógica para el manejo de inicio de sesión
+    setError('');
+
+    try {
+
+      await login(email, password);
+      navigate('/member-dashboard'); 
+    } catch (err) {
+      setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+      console.error('Error en el login:', err);
+    }
   };
 
   return (
@@ -50,6 +63,8 @@ const LoginForm = () => {
               </span>
             </div>
           </div>
+
+          {error && <p className="help is-danger">{error}</p>}
 
           {/* Botón de inicio de sesión */}
           <div className="field">
