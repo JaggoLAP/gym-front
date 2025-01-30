@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import  { useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
+ 
 const InscriptionForm = ({ activity }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
