@@ -56,6 +56,7 @@ const MemberDashboard = () => {
         <p>Email: {socio.email}</p>
         <p>Teléfono: {socio.telefono}</p>
         <p>Dirección: {socio.direccion}</p>
+        <p>Estado: {socio.estado}</p>
       </div>
       
       <div className="mt-4">

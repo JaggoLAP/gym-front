@@ -3,8 +3,7 @@ const authService = {
     getSocioIdByEmail: async (email) => {
         try {
           console.log('1- email: ', email);
-          //console.log('2- direccion_web: ', (`$import.meta.env.VITE_API_BASE_URL}/socios/email/${email}`));
-          //const socio = await Socio.findOne({ email });
+
           const response1 = await fetch(`${import.meta.env.VITE_API_BASE_URL}/socios/email/${email}`, {
                 method: 'GET',
                 headers: {

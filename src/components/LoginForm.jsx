@@ -16,7 +16,7 @@ const LoginForm = () => {
     try {
 
       await login(email, password);
-      navigate('/member-dashboard'); 
+      navigate('/cliente'); 
     } catch (err) {
       setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
       console.error('Error en el login:', err);

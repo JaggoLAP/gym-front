@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
-const RegisterForm = () => {
+const RegisterForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
     nombre: '',
+    apellido: '',
     email: '',
     password: '',
     confirmPassword: '',
+    telefono: '',
+    direccion: '',
     role: 'cliente', // Por defecto, todos serán clientes
     numeroEmpleado: '', // Solo si el usuario es empleado
   });
@@ -14,10 +17,40 @@ const RegisterForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Registrando usuario:', formData);
-    // backend
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Las contraseñas no coinciden.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/socios/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          apellido: formData.apellido,
+          email: formData.email,
+          telefono: formData.telefono,
+          direccion: formData.direccion,
+          password: formData.password,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al registrar el socio');
+      }
+
+      const result = await response.json();
+      alert(result.message); 
+      onClose(); 
+    } catch (error) {
+      alert(error.message); 
+    }
   };
 
   return (
@@ -25,9 +58,10 @@ const RegisterForm = () => {
       <div className="box" style={{ maxWidth: '400px', margin: '50px auto' }}>
         <h1 className="title has-text-centered">Registro</h1>
         <form onSubmit={handleSubmit}>
+
           {/* Nombre */}
           <div className="field">
-            <label className="label">Nombre Completo</label>
+            <label className="label">Nombre</label>
             <div className="control has-icons-left">
               <input
                 className="input"
@@ -35,6 +69,25 @@ const RegisterForm = () => {
                 name="nombre"
                 placeholder="Ingresa tu nombre"
                 value={formData.nombre}
+                onChange={handleChange}
+                required
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Apellido */}
+          <div className="field">
+            <label className="label">Apellido</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                name="apellido"
+                placeholder="Ingresa tu apellido"
+                value={formData.apellido}
                 onChange={handleChange}
                 required
               />
@@ -97,6 +150,42 @@ const RegisterForm = () => {
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Telefono */}
+          <div className="field">
+            <label className="label">Teléfono</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                name="telefono"
+                placeholder="3876543210"
+                value={formData.telefono}
+                onChange={handleChange}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-phone"></i>
+              </span>
+            </div>
+          </div>
+
+          {/* Direccion */}
+          <div className="field">
+            <label className="label">Dirección</label>
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                name="direccion"
+                placeholder="Calle Nro 20"
+                value={formData.direccion}
+                onChange={handleChange}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-map-marker-alt"></i>
               </span>
             </div>
           </div>

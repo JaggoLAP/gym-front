@@ -49,12 +49,7 @@ function HomePage() {
               >
                 ¿Primera vez? <u>Regístrate</u>
                </p>
-              {/*<a href="/register" 
-                className="button is-link is-small" 
-                style={{color:'white',textDecoration:'underline'}}
-              >
-                Primera Vez → Registrate
-              </a>*/}
+              
             </div>
           </div>
         </div>
