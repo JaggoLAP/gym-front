@@ -1,5 +1,5 @@
 import 'react';
-import Navbar from '../components/navBar';
+import Navbarpages from '../components/Navbarpages';
 import Footer from '../components/Footer';
 import ActivitiesList from '../components/ActivitiesList';
 import ClientsList from '../components/ClientsList';
@@ -7,7 +7,7 @@ import ClientsList from '../components/ClientsList';
 const EmployeePage = () => {
   return (
     <div>
-      <Navbar />
+      <Navbarpages />
       <section className="section">
         <div className="container">
           <h1 className="title">Panel de Administración</h1>
