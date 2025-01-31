@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import ClientePage from './pages/ClientPage';
 
 import LoginPage from './pages/Login';
+import RegisterPage from './pages/RegisterPage';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import MemberDashboard from './pages/MemberDashboard';
 import { AuthProvider } from './contexts/AuthContext';

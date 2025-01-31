@@ -1,8 +1,11 @@
 import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'react';
 
-// eslint-disable-next-line react/prop-types
-function Navbar ({ onLoginClick }) {
+
+ 
+function Navbar () {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -11,20 +14,19 @@ function Navbar ({ onLoginClick }) {
   return (
     <div>
         <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
-         <div className="navbar-brand">
-             <a className="navbar-item" href="/">
+            <div className="navbar-brand">
+                <a className="navbar-item" href="/">
                     Gym Average Joe
                 </a>
-         </div>
-         <div className="navbar-menu">
+            </div>
+            <div className="navbar-menu">
                <div className="navbar-end">
-                 <a className="navbar-item" href="#activities">Actividades</a>
-                 <a className="navbar-item" href="#" onClick={openModal}>Nosotros</a>
-                 <a className="navbar-item" onClick={onLoginClick} style={{ cursor: 'pointer' }}>
-                        Iniciar Sesión
+                    <a className="navbar-item" onClick={openModal}>Nosotros</a>
+                    <a className="navbar-item" onClick={() => navigate ("/")}>
+                        Inicio
                     </a>
                 </div>
-         </div>
+            </div>
         </nav>
 
         {/* Modal */}

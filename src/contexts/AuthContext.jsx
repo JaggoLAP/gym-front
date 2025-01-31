@@ -1,12 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import  { createContext, useState, useEffect } from 'react';
+{/*import { useNavigate } from 'react-router-dom';*/}
 import authService from '../services/authService';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  {/*const navigate = useNavigate();*/}
 
   useEffect(() => {
     const user = authService.getCurrentUser();
